@@ -1,0 +1,44 @@
+Calculating the cost of catering: a major wedding expense
+========================================================
+author: 
+date: 
+autosize: true
+
+Background
+========================================================
+
+- Catering can be one of the largest wedding expenses. 
+- Typically, catering includes a meal and drinks and is calculated per guest. 
+- Many couples fail to take into account this cost when putting together a guest list. 
+
+Guest list size vs. cost
+========================================================
+
+The size of the guest list and the alcohol package are major drivers of catering cost. The graph below shows the price based on the size of the guest list (adults over 21 years old) and alcohol package, with a fixed meal cost of $50.
+
+```{r, echo=FALSE,fig.width=12, fig.height=6,fig.align="center"}
+library(ggplot2)
+library(reshape2)
+
+costs = data.frame(Guests=seq(0,200,1),Full=rep(25,201),Beer=rep(20,201),None=rep(5,201))
+costs = melt(costs,id.var="Guests")
+colnames(costs)[2:3] = c("Package","Cost")
+
+ggplot(costs,aes(x=Guests,y=Guests*(Cost+50)/1000,color=Package)) + geom_line() + xlab("Guests (age 21+)") + ylab("Cost (thousand dollars)") + scale_color_discrete(labels=setNames(c("Full bar","Beer and wine","No alcohol"),c("Full","Beer","None")),name="Drinks package")
+```
+
+Cost calculation app
+========================================================
+
+Our Shiny app allows the user to estimate the cost of catering using the number of guests in each age range and the alcohol package as inputs. 
+
+https://www.shinyapps.io/admin/#/application/848620
+
+Alternatives
+========================================================
+
+Unable to get the catering cost under budget? Consider these alternatives:
+
+- Get married on Friday instead of Saturday or in the morning rather than the evening
+- Get married in the off-season (typically winter)
+- Bring your own alcohol (be sure to check local liquor laws!)
